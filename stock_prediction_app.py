@@ -57,9 +57,11 @@ if ticker:
     st.subheader('Stock Data')
     st.write(data)
     
-    # Display data
-    st.subheader('Stock Data')
-    st.write(data)
+    # Display current price
+    ticker_info = yf.Ticker(ticker)
+    current_price = ticker_info.history(period="1d").iloc[-1]["Close"]
+    st.subheader('Current Price')
+    st.write(current_price)
 
     # Additional functionalities
     if st.sidebar.checkbox("Show Volume"):
