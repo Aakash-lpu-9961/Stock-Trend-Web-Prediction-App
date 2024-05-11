@@ -27,6 +27,9 @@ st.markdown(
     .css-1aumxhk, .css-1q9oajh {
         border-radius: 20px;
     }
+    .st-eb {
+        font-size: 18px;
+    }
     </style>
     """,
     unsafe_allow_html=True
