@@ -88,6 +88,28 @@ if ticker:
         st.subheader('Price Distribution')
         fig_distribution = px.histogram(data, x='Close', nbins=50, title='Price Distribution')
         st.plotly_chart(fig_distribution)
+    # Plot historical prices with moving averages
+    if st.sidebar.checkbox("Show Moving Averages"):
+        st.subheader('Historical Prices with Moving Averages')
+
+        # Calculate moving averages
+        short_window = st.sidebar.slider("Short Moving Average Window", min_value=5, max_value=50, value=20)
+        long_window = st.sidebar.slider("Long Moving Average Window", min_value=50, max_value=200, value=100)
+
+        data['Short_MA'] = data['Close'].rolling(window=short_window, min_periods=1).mean()
+        data['Long_MA'] = data['Close'].rolling(window=long_window, min_periods=1).mean()
+
+        # Plot historical prices with moving averages
+        plt.figure(figsize=(10, 6))
+        plt.plot(data.index, data['Close'], label='Close Price', color='black', alpha=0.7)
+        plt.plot(data.index, data['Short_MA'], label=f'{short_window}-Day MA', color='blue')
+        plt.plot(data.index, data['Long_MA'], label=f'{long_window}-Day MA', color='red')
+        plt.title('Historical Prices with Moving Averages')
+        plt.xlabel('Date')
+        plt.ylabel('Price')
+        plt.legend()
+        plt.grid(True)
+        st.pyplot(plt)
 
     # Plot historical prices
     if st.sidebar.checkbox("Show Line Chart"):
