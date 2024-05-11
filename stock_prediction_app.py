@@ -123,6 +123,14 @@ if ticker:
         future_dates_ordinal = np.array([date.toordinal() for date in future_dates]).reshape(-1, 1)
         future_predictions = lr_model.predict(future_dates_ordinal)
 
+        # Display predicted future prices in a table
+        future_prices_df = pd.DataFrame({
+            'Date': future_dates,
+            'Predicted Price': future_predictions
+        })
+        st.subheader('Predicted Future Prices')
+        st.write(future_prices_df)
+
         # Plot future predictions
         plt.figure(figsize=(10, 6))
         plt.plot(data['Date'], data['Close'], label='Historical Close Price', linewidth=2, color='#1F77B4')
