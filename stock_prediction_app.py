@@ -56,6 +56,10 @@ if ticker:
     # Display data
     st.subheader('Stock Data')
     st.write(data)
+    
+    # Display data
+    st.subheader('Stock Data')
+    st.write(data)
 
     # Additional functionalities
     if st.sidebar.checkbox("Show Volume"):
